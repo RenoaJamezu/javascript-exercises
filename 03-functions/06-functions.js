@@ -65,6 +65,11 @@ function maxNumber2(a, b) {
 }
 console.log(maxNumber2(5, 6))
 
+// or
+function maxNumber3(a, b) {
+  return a > b ? a : b
+}
+
 // EXERCISE 5 (IMPORTANT):
 // Create a function named `greetUser`
 // It accepts a name

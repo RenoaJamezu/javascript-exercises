@@ -48,7 +48,8 @@ console.log(total)
 // EXERCISE 7:
 // Find the largest number in the array (do not use Math.max)
 
-let largest = null
+// my approach using null
+let largest = null // better approach using: numbers[0]
 for (let i = 0; i < numbers.length; i++) {
   if (numbers[i] > largest) {
     largest = numbers[i]

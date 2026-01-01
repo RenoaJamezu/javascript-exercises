@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DOM Interaction Practice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .active {
+      background-color: lightgreen;
+      padding: 10px;
+    }
+
+    #card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>DOM Interaction Practice</h1>
+
+  <!-- EXERCISE 1–3 -->
+  <input type="text" id="nameInput" placeholder="Enter your name" />
+  <button id="submitBtn">Submit</button>
+  <p id="output"></p>
+
+  <hr />
+
+  <!-- EXERCISE 4 -->
+  <button id="countBtn">Click me</button>
+  <span id="countValue">0</span>
+
+  <hr />
+
+  <!-- EXERCISE 5 -->
+  <div id="card">Toggle me</div>
+  <button id="toggleBtn">Toggle Active</button>
+
+  <hr />
+
+  <!-- EXERCISE 6–10 -->
+  <input type="text" id="todoInput" placeholder="New todo" />
+  <button id="addTodoBtn">Add Todo</button>
+  <button id="clearBtn">Clear All</button>
+
+  <ul id="todoList"></ul>
+
+  <!-- <script src="js/10-dom-interaction.js"></script> -->
+  <script src="js/11-dom-functions.js"></script>
+</body>
+</html>
