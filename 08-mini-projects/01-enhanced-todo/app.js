@@ -31,7 +31,6 @@ let currentFilter = "all"
 
 let todos = []
 const savedTodos = JSON.parse(localStorage.getItem("todos"))
-console.log(savedTodos)
 if (savedTodos) {
   todos.push(...savedTodos)
   renderTodos2()
