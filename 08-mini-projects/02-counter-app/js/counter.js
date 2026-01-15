@@ -23,7 +23,7 @@ const incrementBtn = document.getElementById("incrementBtn")
 const decrementBtn = document.getElementById("decrementBtn")
 const resetBtn = document.getElementById("resetBtn")
 const historyList = document.getElementById("historyList")
-let count = 0
+let counts = 0
 let history = []
 
 /* =========================
@@ -35,6 +35,17 @@ let history = []
   - Update the DOM accordingly
 */
 
+const savedCounts = JSON.parse(localStorage.getItem("counts"))
+if (savedCounts) {
+  counts = savedCounts
+  renderCounts()
+}
+const savedHistory = JSON.parse(localStorage.getItem("history"))
+if (savedHistory) {
+  history.push(...savedHistory)
+  renderHistory()
+}
+
 /* =========================
   UPDATE COUNTER FUNCTION
 =========================
@@ -42,6 +53,9 @@ let history = []
 - Save the updated count to localStorage
 */
 
+function renderCounts() {
+  counterValue.textContent = counts
+}
 
 /* =========================
   ADD TO HISTORY FUNCTION
@@ -52,6 +66,67 @@ let history = []
 - Re-render the history list
 */
 
+const increment = () => {
+  counts += 1
+  const count = {
+    action: "Increment",
+    count: counts
+  }
+  history.push(count)
+  localStorage.setItem("counts", JSON.stringify(counts))
+  localStorage.setItem("history", JSON.stringify(history))
+  renderHistory()
+  renderCounts()
+}
+const decrement = () => {
+  counts -= 1
+  const count = {
+    action: "Decrement",
+    count: counts
+  }
+  history.push(count)
+  localStorage.setItem("counts", JSON.stringify(counts))
+  localStorage.setItem("history", JSON.stringify(history))
+  renderHistory()
+  renderCounts()
+}
+const reset = () => {
+  counts = 0
+  const count = {
+    action: "Reset",
+    count: counts
+  }
+  history.push(count)
+  localStorage.setItem("counts", JSON.stringify(counts))
+  localStorage.setItem("history", JSON.stringify(history))
+  renderHistory()
+  renderCounts()
+}
+
+// with helper function
+const addHistory = (action) => {
+  history.push({ action, count: counts });
+  localStorage.setItem("counts", JSON.stringify(counts));
+  localStorage.setItem("history", JSON.stringify(history));
+  renderHistory();
+  renderCounts();
+};
+
+const increment2 = () => {
+  counts += 1;
+  addHistory("Increment");
+};
+
+const decrement2 = () => {
+  counts -= 1;
+  addHistory("Decrement");
+};
+
+const reset2 = () => {
+  counts = 0;
+  addHistory("Reset");
+};
+
 /* =========================
   RENDER HISTORY FUNCTION
 =========================
@@ -60,6 +135,16 @@ let history = []
 - Append it to the historyList
 */
 
+function renderHistory() {
+  historyList.innerHTML = ""
+
+  history.forEach(h => {
+    const li = document.createElement("li")
+    li.textContent = `${h.action}: ${h.count}`
+    historyList.prepend(li) // prepend for newest entry to appear
+  });
+}
+
 /* =========================
   EVENT LISTENERS
 =========================
@@ -67,3 +152,7 @@ let history = []
 - decrementBtn click → decrease count, update counter, add history
 - resetBtn click → reset count to 0, update counter, add history
 */
+
+incrementBtn.addEventListener("click", increment2)
+decrementBtn.addEventListener("click", decrement2)
+resetBtn.addEventListener("click", reset2)
