@@ -156,3 +156,154 @@ function renderHistory() {
 incrementBtn.addEventListener("click", increment2)
 decrementBtn.addEventListener("click", decrement2)
 resetBtn.addEventListener("click", reset2)
+
+/*
+FILE: counter.js
+STAGE: 13
+GOAL: Refactor the counter app to use action-based state management
+*/
+
+/* =========================
+  STEP 1 — APP STATE
+=========================
+
+INSTRUCTIONS:
+- Create a single object named `state`
+- This object is the ONLY source of truth
+- It must contain:
+  - count (number)
+  - history (array)
+
+- Do NOT create separate `count` or `history` variables
+- All reads and writes must go through `state`
+*/
+
+
+/* =========================
+  STEP 2 — ACTION TYPES
+=========================
+
+INSTRUCTIONS:
+- Create constants for action types
+- Required action types:
+  - INCREMENT
+  - DECREMENT
+  - RESET
+
+- These must be strings
+- These constants will be used everywhere instead of raw strings
+*/
+
+
+/* =========================
+  STEP 3 — DOM SELECTION
+=========================
+
+INSTRUCTIONS:
+- Select and store the following DOM elements:
+  - counterValue span
+  - increment button
+  - decrement button
+  - reset button
+  - historyList ul
+
+- Store them in constants
+*/
+
+
+/* =========================
+  STEP 4 — DISPATCH FUNCTION
+=========================
+
+INSTRUCTIONS:
+- Create a function named `dispatch`
+- It must accept one parameter: `action`
+- The action is an object with a `type` property
+
+- Inside this function:
+  - Decide how the state changes based on `action.type`
+  - Update `state.count`
+  - Push an entry into `state.history`
+  - Save the updated state to localStorage
+  - Call render functions
+
+- This function is the ONLY place allowed to mutate state
+*/
+
+
+/* =========================
+  STEP 5 — RENDER COUNTER
+=========================
+
+INSTRUCTIONS:
+- Create a function to render the counter value
+- It must:
+  - Read ONLY from `state.count`
+  - Update the counterValue element
+
+- No logic
+- No state mutation
+*/
+
+
+/* =========================
+  STEP 6 — RENDER HISTORY
+=========================
+
+INSTRUCTIONS:
+- Create a function to render history
+- It must:
+  - Clear the history list
+  - Loop through `state.history`
+  - Create an <li> for each entry
+  - Display action type and count
+
+- Do NOT modify state here
+*/
+
+
+/* =========================
+  STEP 7 — LOCAL STORAGE LOAD
+=========================
+
+INSTRUCTIONS:
+- On page load:
+  - Check if saved state exists in localStorage
+  - If yes, replace the default state with saved state
+  - If no, keep the default state
+  - Render the UI once
+
+- Do NOT trigger actions here
+*/
+
+
+/* =========================
+  STEP 8 — EVENT LISTENERS
+=========================
+
+INSTRUCTIONS:
+- Add click listeners for each button
+- Each listener must:
+  - Call `dispatch`
+  - Pass the correct action object
+
+- Button handlers must:
+  - NOT touch state directly
+  - NOT touch localStorage
+  - NOT update the DOM
+*/
+
+
+/* =========================
+  STAGE 13 CHECKLIST
+=========================
+
+VERIFY:
+- All state lives inside `state`
+- All updates go through `dispatch`
+- Buttons only dispatch actions
+- Render functions are read-only
+- App works after refresh
+
+If all true → Stage 13 complete
+*/
