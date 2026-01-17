@@ -178,6 +178,10 @@ INSTRUCTIONS:
 - All reads and writes must go through `state`
 */
 
+const state = {
+  count: 0,
+  history: []
+}
 
 /* =========================
   STEP 2 — ACTION TYPES
@@ -194,6 +198,9 @@ INSTRUCTIONS:
 - These constants will be used everywhere instead of raw strings
 */
 
+const aincrement = "INCREMENT"
+const adecrement = "DECREMENT"
+const areset = "RESET"
 
 /* =========================
   STEP 3 — DOM SELECTION
@@ -210,6 +217,7 @@ INSTRUCTIONS:
 - Store them in constants
 */
 
+// done at the top
 
 /* =========================
   STEP 4 — DISPATCH FUNCTION
@@ -230,6 +238,40 @@ INSTRUCTIONS:
 - This function is the ONLY place allowed to mutate state
 */
 
+function dispatch(action) {
+  switch (action) {
+    case aincrement:
+      state.count += 1
+      state.history.push({
+        action: "Increment",
+        count: state.count
+      })
+      break
+
+    case adecrement:
+      state.count -= 1
+      state.history.push({
+        action: "Decrement",
+        count: state.count
+      })
+      break
+
+    case areset:
+      state.count = 0
+      state.history.push({
+        action: "Reset",
+        count: state.count
+      })
+      break
+    default:
+      console.warn("Unkown action:", action.type)
+      return
+  }
+
+  render()
+
+  renderHistory2()
+}
 
 /* =========================
   STEP 5 — RENDER COUNTER
@@ -245,6 +287,9 @@ INSTRUCTIONS:
 - No state mutation
 */
 
+function render() {
+  counterValue.textContent = state.count
+}
 
 /* =========================
   STEP 6 — RENDER HISTORY
@@ -261,6 +306,15 @@ INSTRUCTIONS:
 - Do NOT modify state here
 */
 
+function renderHistory2() {
+  historyList.innerHTML = ""
+
+  history.forEach(h => {
+    const li = document.createElement("li")
+    li.textContent = `${h.action}: ${h.count}`
+    historyList.prepend(li) // prepend for newest entry to appear
+  });
+}
 
 /* =========================
   STEP 7 — LOCAL STORAGE LOAD
